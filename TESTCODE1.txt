@@ -1,0 +1,58 @@
+TEST CODE
+
+1. PROGRAM TO DISPLAY SCREEN WHICH ACCEPTS DEPT CODE THEN COPIES THE EMPLOYEES OF SELECTED DEPT TO ANOTHER FILE
+
+ Columns . . . :    6  76            Edit                      TEN22LIB/TRNGSRC 
+ SEU==>                                                                 ASSIGNR 
+ FMT FX FFilename++IPEASF.....L.....A.Device+.Keywords+++++++++++++++++++++++++ 
+        *************** Beginning of data ************************************* 
+0001.00 FEMPLIF10  IF   E           K DISK                                      
+0002.00 FEMPMASTER1O    E           K DISK                                      
+0003.00 FASSIGND   CF   E             WORKSTN                                   
+0004.00 DQDEPT            S              2P 0 INZ(30)                           
+0005.00 C                   EXFMT     SCR                                       
+0006.00 C     QDEPT         SETLL     EMPREC                                    
+0007.00 C     QDEPT         READE     EMPREC                                    
+0008.00 C                   DOW       NOT %EOF                                  
+0009.00 C                   WRITE     EREC                                      
+0010.00 C     QDEPT         READE     EMPREC                                    
+0011.00 C                   ENDDO                                               
+0012.00 C                   EVAL      *INLR=*ON                                 
+        ****************** End of data **************************************** 
+
+
+2. PROGRAM TO DISPLAY SUBFILE OF ALL RECORDS OF PF: ODD ROW SHOULD BE IN BLUE AND EVEN ROW SHOULD BE IN YELLOW
+
+ Columns . . . :    6  76            Edit                      TEN22LIB/TRNGSRC 
+ SEU==>                                                                COLRSFLR 
+ FMT FX FFilename++IPEASF.....L.....A.Device+.Keywords+++++++++++++++++++++++++ 
+        *************** Beginning of data ************************************* 
+0001.00 FEMPLOYEE  IF   E           K DISK                                      
+0002.00 FCOLRSFLD  CF   E             WORKSTN SFILE(COLSFL:RRN)                 
+0003.00 DRRN              S              3P 0 INZ(0)                            
+0004.00 C                   EVAL      *IN73=*ON                                 
+0005.00 C                   WRITE     COLCTL                                    
+0006.00 C                   EVAL      RRN=0                                     
+0007.00 C                   EVAL      *IN73=*OFF                                
+0008.00 C     *LOVAL        SETLL     EMPREC                                    
+0009.00 C                   READ      EMPREC                                    
+0010.00 C                   DOW       NOT %EOF                                  
+0011.00 C                   MOVEA     '00'          *IN(41)                     
+0012.00 C                   IF        %REM(RRN:2)=1                             
+0013.00 C                   EVAL      *IN41=*ON                                 
+0014.00 C                   ELSE                                                
+0015.00 C                   EVAL      *IN42=*ON                                 
+0016.00 C                   ENDIF                                               
+0017.00 C                   EVAL      RRN+=1                                    
+0018.00 C                   WRITE     COLSFL                                    
+0019.00 C                   READ      EMPREC                                    
+0020.00 C                   ENDDO                                               
+0021.00 C                   EVAL      *IN71=*ON                                 
+0022.00 C                   EVAL      *IN72=*ON                                 
+0023.00 C                   DOW       NOT *IN03                                 
+0024.00 C                   EXFMT     COLCTL                                    
+0025.00 C                   ENDDO                                               
+0026.00 C                   EVAL      *INLR=*ON                                
+        ****************** End of data ****************************************
+                                                                               
+                                                                               
